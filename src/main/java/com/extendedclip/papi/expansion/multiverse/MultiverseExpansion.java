@@ -37,17 +37,23 @@ public class MultiverseExpansion extends PlaceholderExpansion implements Cacheab
     @NotNull
     @Override
     public String getVersion() {
-        return "1.0.1";
+        return "1.0.2";
     }
 
     @NotNull
     @Override
-    public String onPlaceholderRequest(@Nullable final Player p, @NotNull final String s) {
+    public String onPlaceholderRequest(@Nullable final Player p, @NotNull String s) {
         if (p == null) {
             return "";
         }
-        final MultiverseWorld mvworld = this.core.getMVWorldManager().getMVWorld(p.getWorld());
-        if (!this.core.getMVWorldManager().isMVWorld(p.getWorld())) {
+        final MultiverseWorld mvworld;
+        if (s.startsWith("world_name_colored_") && s.length() > 19) {
+            mvworld = this.core.getMVWorldManager().getMVWorld(s.substring(19));
+            s = "world_name_colored";
+        } else {
+            mvworld = this.core.getMVWorldManager().getMVWorld(p.getWorld());
+        }
+        if (mvworld == null) {
             return "";
         }
         switch (s) {
