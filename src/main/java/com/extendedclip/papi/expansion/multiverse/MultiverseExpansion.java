@@ -37,7 +37,7 @@ public class MultiverseExpansion extends PlaceholderExpansion implements Cacheab
     @NotNull
     @Override
     public String getVersion() {
-        return "1.0.1";
+        return "1.0.2";
     }
 
     @NotNull
